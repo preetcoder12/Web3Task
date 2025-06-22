@@ -23,6 +23,7 @@ body {
   min-height: 100vh;
   text-align: center;
   position: relative;
+  padding: 0 1rem;
 }
 
 .animation-container {
@@ -178,6 +179,10 @@ body {
   margin-top: 2rem;
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 .start-button,
@@ -190,6 +195,7 @@ body {
   color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 150px;
 }
 
 .start-button {
@@ -211,6 +217,10 @@ body {
   bottom: 140px;
   font-size: 0.95rem;
   font-weight: 500;
+  padding: 0 1rem;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .connection-status .connected {
@@ -223,21 +233,28 @@ body {
 
 .self-section {
   position: absolute;
-  bottom: 90px;
+  bottom: 20px;
   font-size: 1rem;
   font-weight: 500;
+  padding: 0 1rem;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .self {
   font-size: 0.95rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 0.5rem;
 }
 
 .logo-title {
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .logo-title img {
@@ -246,20 +263,6 @@ body {
   object-fit: contain;
 }
 
-@media (max-width: 768px) {
-  .text-title {
-    font-size: 2rem;
-  }
-
-  .button-container {
-    flex-direction: column;
-  }
-
-  .start-button,
-  .stop-button {
-    width: 100%;
-  }
-}
 .gitimg {
   width: 40px;
   height: 40px;
@@ -273,5 +276,196 @@ body {
 
 .github-link {
   display: inline-block;
-  margin-top: 16px;
+  margin-top: 8px;
+}
+
+/* Tablet styles */
+@media (max-width: 768px) {
+  .text-title {
+    font-size: 2.5rem;
+    margin-top: 80px;
+  }
+
+  .button-container {
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .start-button,
+  .stop-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    min-width: 140px;
+  }
+
+  .connection-status {
+    bottom: 120px;
+    font-size: 0.9rem;
+  }
+
+  .self-section {
+    bottom: 15px;
+  }
+
+  .self {
+    font-size: 0.9rem;
+  }
+
+  .gitimg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logo-title img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .app {
+    padding: 0 0.5rem;
+  }
+
+  .text-title {
+    font-size: 2rem;
+    margin-top: 60px;
+  }
+
+  .logo-title {
+    gap: 8px;
+  }
+
+  .logo-title img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    max-width: 280px;
+  }
+
+  .start-button,
+  .stop-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    min-width: auto;
+  }
+
+  .connection-status {
+    bottom: 100px;
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
+
+  .self-section {
+    bottom: 10px;
+    padding: 0 0.5rem;
+  }
+
+  .self {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .gitimg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .github-link {
+    margin-top: 4px;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 360px) {
+  .text-title {
+    font-size: 1.75rem;
+    margin-top: 50px;
+  }
+
+  .logo-title {
+    gap: 6px;
+  }
+
+  .logo-title img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .button-container {
+    max-width: 250px;
+    gap: 0.5rem;
+  }
+
+  .start-button,
+  .stop-button {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .connection-status {
+    bottom: 90px;
+    font-size: 0.8rem;
+  }
+
+  .self-section {
+    bottom: 8px;
+  }
+
+  .self {
+    font-size: 0.8rem;
+  }
+
+  .gitimg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 320px) {
+  .text-title {
+    font-size: 1.5rem;
+    margin-top: 40px;
+  }
+
+  .logo-title {
+    gap: 5px;
+  }
+
+  .logo-title img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button-container {
+    max-width: 220px;
+  }
+
+  .start-button,
+  .stop-button {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .connection-status {
+    bottom: 80px;
+    font-size: 0.75rem;
+  }
+
+  .self {
+    font-size: 0.75rem;
+  }
+
+  .gitimg {
+    width: 24px;
+    height: 24px;
+  }
 }
