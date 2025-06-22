@@ -12,8 +12,9 @@ function App() {
   useEffect(() => {
 const socketUrl =
   process.env.NODE_ENV === "production"
-    ? "wss://web3task-backend.onrender.com"
+    ? "wss://web3task-1.onrender.com"
     : "ws://localhost:8080";
+
 
 
     const ws = new WebSocket(socketUrl);
