@@ -1,4 +1,3 @@
-// server.js
 const WebSocket = require('ws');
 const http = require('http');
 
@@ -53,10 +52,10 @@ wss.on('connection', ws => {
         console.log(`Received message: ${message}`);
         try {
             const parsedMessage = JSON.parse(message);
-            if (parsedMessage.type === 'START_ANIMATION') {
+            if (parsedMessage.type === 'Animation->Start :)....') {
                 animationClients.add(ws);
                 startSendingAnimationData();
-            } else if (parsedMessage.type === 'STOP_ANIMATION') {
+            } else if (parsedMessage.type === 'Animation->Stop....') {
                 animationClients.delete(ws);
                 if (animationClients.size === 0) {
                     stopSendingAnimationData();
