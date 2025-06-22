@@ -1,0 +1,262 @@
+:root {
+  --ai-bar-width: 100vw;
+  --ai-bar-height: 24px;
+  --ai-blur: 8px;
+  --ai-glow-blur: 25px;
+  --ai-glow-opacity: 0.5;
+  --ai-title-shift: -20px;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: #fcfcfd;
+  overflow-x: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+.animation-container {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.gradient-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--ai-bar-width);
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 80%);
+  z-index: 0;
+}
+
+.gradient-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 0;
+  transform: translateX(-50%) scaleX(0);
+  background: linear-gradient(
+    to right,
+    rgba(0, 122, 255, 0) 0%,
+    rgba(0, 122, 255, 0.2) 10%,
+    rgba(0, 122, 255, 0.6) 25%,
+    rgba(0, 122, 255, 0.9) 35%,
+    rgba(175, 82, 222, 1) 50%,
+    rgba(255, 45, 85, 0.9) 65%,
+    rgba(255, 149, 0, 0.6) 75%,
+    rgba(255, 149, 0, 0.3) 90%,
+    rgba(255, 149, 0, 0) 100%
+  );
+  filter: blur(var(--ai-blur));
+  will-change: transform, opacity, height, filter;
+  z-index: 1;
+}
+
+.gradient-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateY(55%);
+  background: inherit;
+  filter: blur(var(--ai-glow-blur));
+  opacity: var(--ai-glow-opacity);
+  z-index: -1;
+  animation: glowFade 3.2s ease-out forwards;
+}
+
+.gradient-bar.idle {
+  opacity: 0;
+  height: 0;
+  transform: translateX(-50%) scaleX(0);
+  animation: none;
+}
+
+.gradient-bar.running {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+  animation: singleBarAnimation 3.2s cubic-bezier(0.33, 0, 0.67, 1) forwards;
+}
+
+@keyframes glowFade {
+  0%, 25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: var(--ai-glow-opacity);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.text-title {
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-top: 100px;
+  transform: translateY(0);
+  transition: all 0.6s ease;
+  opacity: 0;
+  background: linear-gradient(
+    135deg,
+    #007aff 0%,
+    #5856d6 25%,
+    #af52de 50%,
+    #ff2d55 75%,
+    #ff9500 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-title.active {
+  transform: translateY(var(--ai-title-shift));
+  opacity: 1;
+  animation: gradientShift 3s ease-in-out forwards;
+}
+
+@keyframes singleBarAnimation {
+  0% {
+    height: 0;
+    opacity: 0;
+    transform: translateX(-50%) scaleX(1) translateY(0);
+  }
+  15% {
+    height: var(--ai-bar-height);
+    opacity: 1;
+  }
+  70% {
+    height: var(--ai-bar-height);
+    transform: translateX(-50%) scaleX(1) translateY(-20px);
+  }
+  85% {
+    height: 2px;
+    opacity: 0.7;
+    transform: translateX(-50%) scaleX(1) translateY(-50px);
+  }
+  100% {
+    height: 0;
+    opacity: 0;
+    transform: translateX(-50%) scaleX(1) translateY(-80px);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.button-container {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.start-button,
+.stop-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-button {
+  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+}
+
+.stop-button {
+  background: linear-gradient(135deg, #ff3b30 0%, #ff9500 100%);
+}
+
+.start-button:disabled,
+.stop-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.connection-status {
+  position: absolute;
+  bottom: 90px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.connection-status .connected {
+  color: green;
+}
+
+.connection-status .disconnected {
+  color: red;
+}
+
+.self-section {
+  position: absolute;
+  bottom: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.self {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-title img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .text-title {
+    font-size: 2rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .start-button,
+  .stop-button {
+    width: 100%;
+  }
+}
