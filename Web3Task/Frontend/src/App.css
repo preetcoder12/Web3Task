@@ -208,7 +208,7 @@ body {
 
 .connection-status {
   position: absolute;
-  bottom: 90px;
+  bottom: 140px;
   font-size: 0.95rem;
   font-weight: 500;
 }
@@ -223,7 +223,7 @@ body {
 
 .self-section {
   position: absolute;
-  bottom: 30px;
+  bottom: 90px;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -259,4 +259,19 @@ body {
   .stop-button {
     width: 100%;
   }
+}
+.gitimg {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+}
+
+.gitimg:hover {
+  transform: scale(1.1);
+}
+
+.github-link {
+  display: inline-block;
+  margin-top: 16px;
 }
