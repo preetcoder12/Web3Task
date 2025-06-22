@@ -10,7 +10,13 @@ function App() {
   const animationTimeoutRef = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+const socketUrl =
+  process.env.NODE_ENV === "production"
+    ? "wss://web3task-backend.onrender.com"
+    : "ws://localhost:8080";
+
+
+    const ws = new WebSocket(socketUrl);
     wsRef.current = ws;
 
     ws.onopen = () => {
@@ -45,7 +51,7 @@ function App() {
     setShowTextGradient(false);
 
     if (wsRef.current?.readyState === WebSocket.OPEN) {
-      wsRef.current.send(JSON.stringify({ type: "START_ANIMATION" }));
+      wsRef.current.send(JSON.stringify({ type: "Animation->Start :)...." }));
     }
 
     setTimeout(() => {
@@ -64,7 +70,7 @@ function App() {
     setShowTextGradient(false);
 
     if (wsRef.current?.readyState === WebSocket.OPEN) {
-      wsRef.current.send(JSON.stringify({ type: "STOP_ANIMATION" }));
+      wsRef.current.send(JSON.stringify({ type: "Animation->Stop...." }));
     }
   };
 
